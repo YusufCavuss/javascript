@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ortalama Alma</title>
+
+    <style>
+        #durum {
+            font-size: 25px;
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            text-align: center;
+        }
+
+        #ort {
+            font-size: 25px;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+        }
+
+        .zayif {
+            background-color: #f01717;
+            color: white;
+        }
+
+        .gecer {
+            background-color: #c9ff05;
+            color: white;
+        }
+
+        .orta {
+            background-color: #8ff74a;
+            color: white;
+        }
+
+        .iyi {
+            background-color: #00ff15;
+            color: white;
+        }
+
+        .cokiyi {
+            background-color: #1ca800;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <label for="">Not 1:</label>
+    <input type="text" name="not1" id="not1"> <br>
+
+    <label for="">Not 2:</label>
+    <input type="text" name="not2" id="not2"> <br>
+
+    <label for="">Not 3:</label>
+    <input type="text" name="not3" id="not3"> <br>
+
+    <button onclick="hesapla()">Hesapla</button>
+
+
+    <div id="ort"></div>
+    <div id="durum"></div>
+
+    <script>
+
+        function hesapla(){
+            let not1,not2,not3,ortalama
+
+            not1 = parseInt(document.getElementById("not1").value);
+            not2 = parseInt(document.getElementById("not2").value);
+            not3 = parseInt(document.getElementById("not3").value);
+
+            ortalama = (not1+not2+not3)/3;
+
+            document.getElementById("durum").classList.remove("zayif");
+            document.getElementById("durum").classList.remove("gecer");
+            document.getElementById("durum").classList.remove("orta");
+            document.getElementById("durum").classList.remove("iyi");
+            document.getElementById("durum").classList.remove("cokiyi");
+
+            if(ortalama<50){
+                document.getElementById("durum").innerHTML = "Zayıf";
+                document.getElementById("durum").classList.add("zayif");
+
+
+            } else if(ortalama<55) {
+                document.getElementById("durum").innerHTML = "Geçer";
+                document.getElementById("durum").classList.add("gecer");
+            }  else if(ortalama<70) {
+                document.getElementById("durum").innerHTML = "Orta";
+                document.getElementById("durum").classList.add("orta");
+            } else if(ortalama<85) {
+                document.getElementById("durum").innerHTML = "İyi";
+                document.getElementById("durum").classList.add("iyi");
+            } else if(ortalama<400) {
+                document.getElementById("durum").innerHTML = "Pek İyi";
+                document.getElementById("durum").classList.add("cokiyi");
+            }
+
+            document.getElementById("ort").innerHTML = `Ortalaman: ${ortalama}`;
+
+    }
+    </script>
+</body>
+</html>

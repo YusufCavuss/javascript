@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resim Değiştirme</title>
+
+    <script>
+        function resimdegis1() {
+            document.getElementById("resim").src = "images/resim1.jpg";
+        }
+
+        function resimdegis2() {
+            document.getElementById("resim").src = "images/resim2.jpg";
+        }
+
+        function resimdegis3() {
+            document.getElementById("resim").src = "images/resim3.jpg";
+        }
+    </script>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h3>JavaScript ile Resim Değiştirme</h3>
+
+        <img src="images/resim1.jpg" alt="manzara" width="450" id="resim"> <br>
+        <button onclick="resimdegis1()"> 1 </button>
+        <button onclick="resimdegis2()"> 2 </button>
+        <button onclick="resimdegis3()"> 3 </button>
+    </div>
+
+</body>
+</html>

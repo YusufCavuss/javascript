@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Ekranı</title>
+
+    <style>
+        #kutu {
+            text-align: center;
+            margin: auto;
+            font-size: 25px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            border: 1px solid gray;
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div id="kutu">
+        <label for="">Kullanıcı Adı:</label>
+        <input type="text" name="kadi" id="kadi"> <br>
+        <label for="">Şifre:</label>
+        <input type="text" name="sifre" id="sifre"> <br>
+        <button onclick="girisYap()">Giriş Yap</button>
+    </div>
+
+    <script>
+        function girisYap(){
+            let kullaniciAdi = document.getElementById("kadi").value;
+            let sifre = document.getElementById("sifre").value;
+            let durum = true;
+            let hataMesaji = "";
+            var lowerCaseLetters = /[a-z]/g;
+            var upperCaseLetters = /[A-Z]/g;
+            var numbers = /[0-9]/g;
+            var symbols = /[!@#$%^&*()\-+={}[\]:;"'<>,.?\/|\\]/;
+
+            if(kullaniciAdi.length < 3){
+                durum = false
+                hataMesaji = "Kullanıcı adı en az 3 karakter olmalıdır!"
+                kontrol(durum, hataMesaji);
+            }
+
+            if(sifre.length < 8){
+                durum = false
+                hataMesaji = "Şifre en az 8 karakter olmalıdır!"
+                kontrol(durum, hataMesaji);
+            }
+
+            if(!sifre.match(lowerCaseLetters)){
+                durum = false;
+                hataMesaji = "Şifre küçük harf içermelidir!"
+                kontrol(durum, hataMesaji);
+            }
+            
+            if(!sifre.match(upperCaseLetters)){
+                durum = false;
+                hataMesaji = "Şifre büyük harf içermelidir!"
+                kontrol(durum, hataMesaji);
+            }
+
+            if(!sifre.match(numbers)){
+                durum = false;
+                hataMesaji = "Şifre rakam içermelidir!"
+                kontrol(durum, hataMesaji);
+            }
+
+            if(!sifre.match(symbols)){
+                durum = false;
+                hataMesaji = "Şifre sembol içermelidir!"
+                kontrol(durum, hataMesaji);
+            }
+
+            if(durum == true){
+                kontrol(true, "")
+            }
+        }
+
+        function kontrol(durum, hataMesaji){
+            if(durum == false){
+                document.getElementById("kutu").style.backgroundColor = "#ec4242";
+                alert(hataMesaji);
+            } else {
+                document.getElementById("kutu").style.backgroundColor = "#4dd100";
+                alert("Giriş Başarılı Tebrikler!")
+            }
+        }
+    </script>
+</body>
+</html>

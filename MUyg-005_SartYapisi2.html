@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not Ortalaması</title>
+    <style>
+        .kirmizi{
+            background-color: red;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .yesil{
+            background-color: green;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        #sonuc {
+            font-size: 20px;
+            text-align: center;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+        #durum {
+            text-align: center;
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <label for="">Not 1:</label>
+    <input type="text" name="not1" id="not1"> <br>
+
+    <label for="">Not 2:</label>
+    <input type="text" name="not2" id="not2"> <br>
+
+    <button onclick="hesapla()">Hesapla</button>
+
+    <div id="sonuc"></div>
+    <div id="durum"></div>
+
+    <script>
+        function hesapla(){
+            let not1 = parseFloat(document.getElementById("not1").value);
+            let not2 = parseFloat(document.getElementById("not2").value);
+            ortalama = (not1+not2)/2;
+            
+            document.getElementById("sonuc").innerHTML=`Ortalama: ${ortalama}`;
+
+            if(ortalama >= 50){
+                document.getElementById("durum").innerHTML ="Geçti!";
+                document.getElementById("durum").classList.add("yesil");
+                document.getElementById("durum").classList.remove("kirmizi");
+            } else {
+                document.getElementById("durum").innerHTML = "Kaldı! :(";
+                document.getElementById("durum").classList.remove("yesil");
+                document.getElementById("durum").classList.add("kirmizi");
+            }
+        }
+    </script>
+</body>
+</html>
