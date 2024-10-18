@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayı Tahmin Oyunu</title>
+</head>
+<body>
+    <script>
+        let hak=1;
+        let maxHak=5;
+
+        let sayi = Math.random(1)*100+1;
+        sayi = Math.round(sayi);
+        console.log(sayi)
+
+        alert("5 hakkın başladı sayıyı tahmin et!");
+        while(true){
+            let girilenSayi = parseInt(prompt("Tahmininizi girin:"));
+            if(girilenSayi == sayi){
+                alert("Tebrikler, tahminin doğru!");
+                break;
+            } else if (girilenSayi < sayi){
+                if(hak == maxHak){
+                    alert(`Hakkın bitti, oyunu kaybettin, sayı ${sayi} idi.`);
+                    break;
+                } else {
+                    hak++;
+                    alert(`Tahminin yanlış! Biraz daha yüksek bir sayı tahmin etmen gerek! \n ${maxHak-hak} hakkın kaldı!`);
+                } 
+            } else if (girilenSayi > sayi){
+                if(hak == maxHak){
+                    alert(`Hakkın bitti, oyunu kaybettin, sayı ${sayi} idi.`);
+                    break;
+                } else {
+                    hak++;
+                    alert(`Tahminin yanlış! Biraz daha düşük bir sayı tahmin etmen gerek! \n ${maxHak-hak} hakkın kaldı!`);
+                } 
+            }
+        }
+
+
+    </script>
+</body>
+</html>

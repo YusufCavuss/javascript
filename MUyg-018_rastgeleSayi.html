@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastgele Sayı</title>
+
+    <style>
+        #allPage {
+            width: 1000px;
+            color: white;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: larger;
+        }
+        .boxes {
+            display: inline-block;
+            width: 130px;
+            height: 50px;
+            border: 2px solid black;
+            padding: 5px;
+            margin: 5px;
+            text-align: center;
+        }
+    </style>
+
+
+    <script>
+        function uret(){
+            for(var i=1; i<=6; i++){
+                let rastgeleSayi = Math.floor(Math.random(1)*49+1);
+                let red = Math.floor(Math.random(1)*256);
+                let green = Math.floor(Math.random(1)*256);
+                let blue = Math.floor(Math.random(1)*256);
+
+                document.getElementById(`box`+i).innerHTML = rastgeleSayi;
+                document.getElementById(`box`+i).style.backgroundColor = `rgb(${red},${green},${blue})`;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="allPage">
+        <button id="uretButton" onclick="uret()">Rastgele Sayı Üret</button>
+        <br>
+        <span id="box1" class="boxes"></span>
+        <span id="box2" class="boxes"></span>
+        <span id="box3" class="boxes"></span>
+        <span id="box4" class="boxes"></span>
+        <span id="box5" class="boxes"></span>
+        <span id="box6" class="boxes"></span>
+    </div>
+</body>
+</html>

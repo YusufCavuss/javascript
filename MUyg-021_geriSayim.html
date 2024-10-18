@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geri Sayım</title>
+    <audio src=""></audio>
+</head>
+<body>
+    <div id="zaman"></div>
+
+    <script>
+        let dakikaStr, saniyeStr;
+        
+        let dakika = 0;
+        let saniye = 1; 
+
+        if(dakika<10) dakikaStr = `0${dakika}`;
+        if(saniye<10) saniyeStr = `0${saniye}`;
+
+        document.getElementById("zaman").innerHTML = `${dakikaStr}:${saniyeStr}`;
+        let sonuc = setInterval(gerisay, 1000);
+
+        function gerisay(){
+            if(dakika<10) dakikaStr = `0${dakika}`
+            else dakikaStr = dakika;
+
+            if(saniye<10) saniyeStr = `0${saniye}`
+            else saniyeStr = saniye;
+
+            if(dakika == 0 && saniye == 0){
+                clearInterval(sonuc);
+                alert("Süre Bitti!");
+
+            }
+            document.getElementById("zaman").innerHTML = `${dakikaStr}:${saniyeStr}`;
+            if(saniye == 0){
+                dakika--
+                saniye=59;
+            } else saniye--;
+
+
+        }
+
+    </script>
+</body>
+</html>
