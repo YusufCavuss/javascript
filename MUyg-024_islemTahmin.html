@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastgele Işlem Tahmin</title>
+
+    <style>
+        #allPage{
+            width: 400px;
+            margin: auto;
+        }
+
+        #kutu {
+            width: 350px;
+            border: 3px solid purple;
+            margin: auto;
+            padding: 10px;
+            background-color: lightpink;
+        }
+
+        #num1 {width: 60px;}
+        #operator {width: 30px;}
+        #num2 {width: 60px;}
+        #sonuc {width: 50px;}
+    </style>
+
+    <script>
+        function randomNumAndOp() {
+            const operators = ["+", "-", "*", "/"];
+            let num1 = Math.floor(Math.random() * 100);
+            let num2 = Math.floor(Math.random() * 100);
+            let randomOp = Math.floor(Math.random() * 4);
+            document.getElementById("num1").value = num1;
+            document.getElementById("num2").value = num2;
+            document.getElementById("operator").value = operators[randomOp];
+
+            if(operators[randomOp] == "/"){
+                while(num1 % num2 != 0){
+                    num1 = Math.floor(Math.random() * 100);
+                    num2 = Math.floor(Math.random() * 100);
+                    document.getElementById("num1").value = num1;
+                    document.getElementById("num2").value = num2;
+                }
+            }
+        }
+
+        function check(){
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            let operator = document.getElementById("operator").value;
+            let sonuc = document.getElementById("sonuc").value;
+            let result = 0;
+            switch (operator) {
+                case "+":
+                    result = parseInt(num1) + parseInt(num2);
+                    break;
+                case "-":
+                    result = parseInt(num1) - parseInt(num2);
+                    break;
+                case "*":
+                    result = parseInt(num1) * parseInt(num2);
+                    break;
+                case "/":
+                    result = parseInt(num1) / parseInt(num2);
+                    break;
+            }
+            if(result == parseInt(sonuc)){
+                let puan = parseInt(document.getElementById("puan").innerHTML);
+                puan += 5;
+                document.getElementById("puan").innerHTML = puan;
+                alert("Tebrikler doğru tahmin! +5 puan");
+            }else{
+                let puan = parseInt(document.getElementById("puan").innerHTML);
+                puan -= 5;
+                document.getElementById("puan").innerHTML = puan;
+                alert("Üzgünüm yanlış tahmin! -5 puan");
+            }
+            randomNumAndOp();
+        }
+    </script>
+</head>
+<body onload="randomNumAndOp()">
+    <div id="allPage">
+        <div id="kutu">
+            <input type="text" name="num1" id="num1" disabled>
+            <input type="text" name="operator" id="operator" disabled>
+            <input type="text" name="num2" id="num2" disabled>
+            <label> = </label>
+            <input type="text" name="sonuc" id="sonuc">
+            <button id="controlBtn" onclick="check()">Kontrol</button>
+            <br>
+            <label for="puanLabel">Güncel Puan: </label>
+            <label for="puan" id="puan">0</label>
+        </div>
+    </div>
+</body>
+</html>

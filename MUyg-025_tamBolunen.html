@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tam Bölünen Sayıları Bulma</title>
+
+    <style>
+        #allPage{ width: 205px; margin: auto; }
+        #kutu{border: 3px solid purple; margin: auto; padding: 10px; background-color: lightpink; }
+        #bul{width: 140px;}
+        #num1, #num2 {width: 70px;}
+    </style>
+
+    <script>
+        function bolunenBul(){
+            let baslangic, bitis, sayilar = "";
+            baslangic, bitis, sayilar = parseInt(document.getElementById("num1").value), parseInt(document.getElementById("num2").value);
+
+            for(i=baslangic; i<=bitis; i++){
+                if(i % 3 == 0 && i % 7 == 0)
+                    sayilar += i + " ";
+            }
+
+            sayilar === "" ? document.getElementById("nums").innerHTML = "Herhangi bir sayı bulunamadı" : document.getElementById("nums").innerHTML = sayilar;
+        }
+    </script>
+</head>
+<body>
+    <div id="allPage">
+        <div id="kutu">
+            <input type="text" name="num1" id="num1" placeholder="Başlangıç"> <br>
+            <input type="text" name="num2" id="num2" placeholder="Bitiş"> <br>
+            <button id="bul" onclick="bolunenBul()">Bul</button> <br>
+            <textarea name="" id="nums" rows="10" disabled></textarea>
+        </div>
+    </div>
+</body>
+</html>

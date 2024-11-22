@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha Code</title>
+
+    <style>
+        #allPage {width: 300px; margin: auto;}
+        #Kutu {width: 250px; border: 3px solid purple; margin: auto; padding: 10px; background-color: lightpink;}
+        #captchaKutu {width: 200px; border: 1px solid lightblue; margin: auto; padding: 10px; background-color: rgb(250, 127, 147);}
+        #code {font-size: 20px; font-weight: bold; color: white;}
+    </style>
+
+    <script>
+        function createCode(){
+            let harfler = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+            let sayilar = [0,1,2,3,4,5,6,7,8,9]
+            let code = "";
+            while (code.length < 6){
+                let random = Math.floor(Math.random() * 2);
+                random === 0 ? code += harfler[Math.floor(Math.random() * harfler.length)] : code += sayilar[Math.floor(Math.random() * sayilar.length)];
+            }
+
+            document.getElementById("code").innerHTML = code;
+        }
+    </script>
+</head>
+<body>
+    <div id="allPage">
+        <div id="Kutu">
+            <div id="captchaKutu">
+                <label id="code"></label>
+            </div>
+            <button onclick="createCode()">Oluştur</button>
+        </div>
+    </div>
+</body>
+</html>

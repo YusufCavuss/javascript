@@ -1,0 +1,81 @@
+<!--DEVELOPED BY YUSUF ÇAVUŞOĞLU-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Şifre Oluşturucu</title>
+
+    <style>
+        #allPage {width: 350px; margin: auto; border: 1px solid black; background-color: lightcoral;}
+        #kutu {width: 300px; margin: 10px; border: 3px solid salmon; background-color: pink;}
+        #sifreSayisi {width: 30px;}
+    </style>
+
+    <script>
+
+        function shuffleString(str) {
+            const arr = str.split('');
+    
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr.join('');
+        }
+        function create() {
+            let harflerBuyuk = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+            let harflerKucuk = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+            let sayilar = [0,1,2,3,4,5,6,7,8,9];
+            //DEVELOPED BY YUSUF ÇAVUŞOĞLU
+            let isaretler = ["+","-","*","?","!","#","@"];
+            let sifreler = "";
+            let sifre = "";
+            let adet = parseInt(document.getElementById("sifreSayisi").value);
+            
+            for(j=0; j<adet; j++){
+                for(i = 0; i<=12; i++){
+                    if(i==0 || i==1 || i== 2) sifre += harflerBuyuk[Math.floor(Math.random() * harflerBuyuk.length)];
+                    if(i==3 || i==4 || i== 5) sifre += harflerKucuk[Math.floor(Math.random() * harflerKucuk.length)];
+                    //DEVELOPED BY YUSUF ÇAVUŞOĞLU
+                    if(i==6 || i==7 || i== 8) sifre += sayilar[Math.floor(Math.random() * sayilar.length)];
+                    if(i==9 || i==10 || i== 11) sifre += isaretler[Math.floor(Math.random() * isaretler.length)];
+                    if(i==12){
+                        sifre = shuffleString(sifre);
+                        sifreler += sifre + "\n";
+                        sifre = "";
+                    } 
+                }
+            }
+            document.getElementById("sifreler").innerHTML = sifreler
+        }
+
+        function toTxt(){
+            const textContent = document.getElementById("sifreler").value;
+    
+            const blob = new Blob([textContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+    
+            const temporary = document.createElement("a");
+            temporary.href = url;
+            temporary.download = "sifreler.txt"; 
+            temporary.click();
+    
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</head>
+<body>
+    <div id="allPage">
+        <div id="kutu">
+            <label>Kaç adet şifre oluşturayım?</label>
+            <input type="text" id="sifreSayisi">
+            <button onclick="create()">Oluştur</button>
+            <!--DEVELOPED BY YUSUF ÇAVUŞOĞLU-->
+            <textarea id="sifreler" rows="20" cols="35" disabled></textarea> <br>
+            <button onclick="toTxt()">Dışa Aktar</button>
+        </div>
+    </div>
+</body>
+</html>

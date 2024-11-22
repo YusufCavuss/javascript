@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luhn Algoritması Kontrolü</title>
+    <style>
+        /* Genel Sayfa Stili */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8, #d1e8e2);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #444;
+        }
+
+        /* Container için Stil */
+        .container {
+            background-color: #ffffff;
+            padding: 40px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            transform: scale(1);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+        }
+
+        /* Başlık */
+        h1 {
+            color: #2d3e50;
+            font-size: 28px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Input Alanı */
+        input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: border 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        /* Buton */
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(45deg, #1abc9c, #16a085);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #16a085, #1abc9c);
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            transform: translateY(2px);
+        }
+
+        /* Sonuç Bölümü */
+        .result {
+            margin-top: 25px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .valid {
+            color: #2ecc71;
+            animation: valid 1s ease-in-out infinite;
+        }
+
+        .invalid {
+            color: #e74c3c;
+            animation: invalid 1s ease-in-out infinite;
+        }
+
+        /* Geçerli Sonuç Animasyonu */
+        @keyframes valid {
+            0% { color: #2ecc71; }
+            50% { color: #27ae60; }
+            100% { color: #2ecc71; }
+        }
+
+        /* Geçersiz Sonuç Animasyonu */
+        @keyframes invalid {
+            0% { color: #e74c3c; }
+            50% { color: #c0392b; }
+            100% { color: #e74c3c; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Luhn Algoritması Kontrolü</h1>
+        <input type="text" id="cardNumber" placeholder="Kart numarasını girin">
+        <button onclick="checkLuhn()">Kontrol Et</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function checkLuhn() {
+            const cardNumber = document.getElementById('cardNumber').value.replace(/\D/g, '');
+            const resultDiv = document.getElementById('result');
+            
+            // Eğer numara boşsa ya da uzunluğu 13-19 karakter arasında değilse hata göster
+            if (cardNumber === "" || cardNumber.length < 13 || cardNumber.length > 19) {
+                resultDiv.innerHTML = "Lütfen geçerli bir kart numarası girin (13-19 karakter).";
+                resultDiv.classList.remove('valid', 'invalid');
+                return;
+            }
+
+            let sum = 0;
+            let shouldDouble = false;
+
+            // Kart numarasındaki her basamağı tersten kontrol et
+            for (let i = cardNumber.length - 1; i >= 0; i--) {
+                let digit = parseInt(cardNumber.charAt(i));
+
+                if (shouldDouble) {
+                    digit *= 2;
+                    if (digit > 9) {
+                        digit -= 9;
+                    }
+                }
+
+                sum += digit;
+                shouldDouble = !shouldDouble;
+            }
+
+            // Luhn algoritması doğrulaması
+            if (sum % 10 === 0) {
+                resultDiv.innerHTML = "Kart numarası geçerli! ✔️";
+                resultDiv.classList.remove('invalid');
+                resultDiv.classList.add('valid');
+            } else {
+                resultDiv.innerHTML = "Kart numarası geçersiz! ❌";
+                resultDiv.classList.remove('valid');
+                resultDiv.classList.add('invalid');
+            }
+        }
+    </script>
+
+</body>
+</html>
